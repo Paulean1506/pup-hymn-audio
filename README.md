@@ -1,6 +1,6 @@
-#Project: PUP Hymn Synced Lyrics#
-###Student: Paulean Marguerette F. Parrish###
-###Section: BSCPE 3-6###
+*Project: PUP Hymn Synced Lyrics*
+Student: Paulean Marguerette F. Parrish
+Section: BSCPE 3-6
 
 Live Website: https://paulean1506.github.io/pup-hymn-audio/
 
