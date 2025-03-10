@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PUP Hymn Synced Lyrics</title>
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #333;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .header-logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .header-logo img {
+            width: 300px;
+            height: auto;
+        }
+
+        h1 {
+            margin-top: 60px;
+            margin-bottom: 20px;
+            color: #800000;
+        }
+
+        .lyrics-container {
+            height: 250px;
+            overflow: hidden;
+            border: 2px solid #800000;
+            border-radius: 10px;
+            margin: 0 auto;
+            width: 40%;
+            background-color: #f9f9f9;
+            padding: 10px;
+            position: relative;
+        }
+
+        .lyrics-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            transition: top 0.1s linear;
+            color: #800000;
+            font-size: 24px;
+            line-height: 2.2;
+            white-space: pre-line;
+        }
+
+        .audio-container {
+            background-color: #800000;
+            padding: 10px;
+            margin-top: 20px;
+            display: inline-block;
+            border-radius: 10px;
+        }
+
+        audio {
+            width: 300px;
+            filter: invert(1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-logo">
+        <img src="./assets/pup-ou-logo2.png" alt="PUP Logo">
+    </div>
+
+    <h1>PUP Hymn</h1>
+
+    <div class="lyrics-container">
+        <div class="lyrics-content" id="lyricsContent">
+Sintang Paaralan
+Tanglaw ka ng bayan
+Pandayan ng isip ng kabataan
+
+Kami ay dumating nang salat sa yaman
+Hanap na dunong ay iyong alay
+
+Ang layunin mong makatao
+Dinarangal ang Pilipino
+Ang iyong aral, diwa, adhikang taglay
+PUP, aming gabay
+Paaralang dakila
+PUP, pinagpala
+Gagamitin ang karunungan
+Mula sa iyo, para sa bayan
+Ang iyong aral, diwa, adhikang taglay
+PUP, aming gabay
+Paaralang dakila
+PUP, pinagpala
+        </div>
+    </div>
+
+    <div class="audio-container">
+        <audio id="audio" controls>
+            <source src="./assets/pup-hymn.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <script>
+        const audio = document.getElementById('audio');
+        const lyricsContent = document.getElementById('lyricsContent');
+
+        const lyricsStartTime = 11;
+        const lyricsEndTime = 100;
+        const scrollDistance = 800;
+
+        function syncLyrics() {
+            const currentTime = audio.currentTime;
+
+            if (currentTime < lyricsStartTime) {
+                lyricsContent.style.top = '0px';
+            } else if (currentTime >= lyricsStartTime && currentTime <= lyricsEndTime) {
+                const progress = (currentTime - lyricsStartTime) / (lyricsEndTime - lyricsStartTime);
+                const scrollPosition = -progress * scrollDistance;
+                lyricsContent.style.top = `${scrollPosition}px`;
+            } else if (currentTime > lyricsEndTime) {
+                lyricsContent.style.top = `${-scrollDistance}px`;
+            }
+
+            requestAnimationFrame(syncLyrics);
+        }
+
+        window.addEventListener('load', () => {
+            audio.play().then(() => {
+                syncLyrics();
+            }).catch(err => {
+                console.log("Autoplay prevented by browser:", err);
+                alert("Click anywhere to start the audio!");
+                document.addEventListener('click', () => {
+                    audio.play();
+                    syncLyrics();
+                }, { once: true });
+            });
+        });
+
+        audio.addEventListener('ended', () => {
+            lyricsContent.style.top = '0px';
+        });
+
+        audio.addEventListener('seeked', () => {
+            syncLyrics();
+        });
+    </script>
+
+</body>
+</html>
