@@ -4,115 +4,98 @@
     <meta charset="UTF-8">
     <title>PUP Hymn Synced Lyrics</title>
     <style>
-        /* Reset some basic styles */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
         body {
-            background: linear-gradient(135deg, #800000 0%, #d4af37 100%);
-            color: #fff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            font-family: Arial, sans-serif;
             text-align: center;
             padding: 20px;
-            min-height: 100vh;
+            margin: 0;
         }
 
-        header {
-            position: relative;
-            margin-bottom: 40px;
+        .header-logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
         }
 
         .header-logo img {
-            width: 150px;
+            width: 300px;
             height: auto;
-            position: absolute;
-            top: 0;
-            left: 0;
         }
 
         h1 {
-            color: #ffffff;
-            font-size: 3rem;
-            margin-top: 50px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-top: 60px;
+            margin-bottom: 20px;
+            color: #800000;
         }
 
         .lyrics-container {
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid #ffffff;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 0 auto;
-            width: 80%;
-            max-width: 600px;
-            height: 300px;
+            height: 250px;
             overflow: hidden;
+            border: 2px solid #800000;
+            border-radius: 10px;
+            margin: 0 auto;
+            width: 40%;
+            background-color: #f9f9f9;
+            padding: 10px;
             position: relative;
         }
 
-        .lyrics-line {
-            color: #fff;
-            font-size: 1.5rem;
+        .lyrics-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            transition: top 0.1s linear;
+            color: #800000;
+            font-size: 24px;
             line-height: 2.2;
-            margin: 10px 0;
-            transition: color 0.3s, transform 0.3s;
-        }
-
-        .highlight {
-            color: #ffd700;
-            font-weight: bold;
-            transform: scale(1.1);
+            white-space: pre-line;
         }
 
         .audio-container {
-            background-color: #ffffff;
-            padding: 15px;
-            margin-top: 30px;
+            background-color: #800000;
+            padding: 10px;
+            margin-top: 20px;
             display: inline-block;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
         audio {
-            width: 100%;
-            max-width: 400px;
-        }
-
-        footer {
-            margin-top: 40px;
-            font-size: 0.9rem;
-            color: #f0f0f0;
-        }
-
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2rem;
-            }
-
-            .lyrics-line {
-                font-size: 1.2rem;
-            }
-
-            .header-logo img {
-                width: 100px;
-            }
+            width: 300px;
+            filter: invert(1);
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="header-logo">
-            <img src="./assets/pup-ou-logo2.png" alt="PUP Logo">
-        </div>
-        <h1>PUP Hymn</h1>
-    </header>
+    <div class="header-logo">
+        <img src="./assets/pup-ou-logo2.png" alt="PUP Logo">
+    </div>
 
-    <div class="lyrics-container" id="lyricsContainer">
-        <!-- Lyrics lines go here -->
+    <h1>PUP Hymn</h1>
+
+    <div class="lyrics-container">
+        <div class="lyrics-content" id="lyricsContent">
+Sintang Paaralan
+Tanglaw ka ng bayan
+Pandayan ng isip ng kabataan
+Kami ay dumating nang salat sa yaman
+Hanap na dunong ay iyong alay
+Ang layunin mong makatao
+Dinarangal ang Pilipino
+Ang iyong aral, diwa, adhikang taglay
+PUP, aming gabay
+Paaralang dakila
+PUP, pinagpala
+Gagamitin ang karunungan
+Mula sa iyo, para sa bayan
+Ang iyong aral, diwa, adhikang taglay
+PUP, aming gabay
+Paaralang dakila
+PUP, pinagpala
+        </div>
     </div>
 
     <div class="audio-container">
@@ -122,74 +105,49 @@
         </audio>
     </div>
 
-    <footer>
-        &copy; 2025 Polytechnic University of the Philippines
-    </footer>
-
     <script>
         const audio = document.getElementById('audio');
-        const lyricsContainer = document.getElementById('lyricsContainer');
+        const lyricsContent = document.getElementById('lyricsContent');
 
-        // Define lyrics lines with timestamps
-        const lyrics = [
-            { time: 11, text: "Sintang Paaralan" },
-            { time: 14, text: "Tanglaw ka ng bayan" },
-            { time: 17, text: "Pandayan ng isip ng kabataan" },
-            { time: 21, text: "" },
-            { time: 23, text: "Kami ay dumating nang salat sa yaman" },
-            { time: 27, text: "Hanap na dunong ay iyong alay" },
-            { time: 32, text: "" },
-            { time: 35, text: "Ang layunin mong makatao" },
-            { time: 38, text: "Dinarangal ang Pilipino" },
-            { time: 42, text: "Ang iyong aral, diwa, adhikang taglay" },
-            { time: 46, text: "PUP, aming gabay" },
-            { time: 50, text: "Paaralang dakila" },
-            { time: 54, text: "PUP, pinagpala" },
-            { time: 58, text: "Gagamitin ang karunungan" },
-            { time: 62, text: "Mula sa iyo, para sa bayan" },
-            { time: 68, text: "Ang iyong aral, diwa, adhikang taglay" },
-            { time: 72, text: "PUP, aming gabay" },
-            { time: 76, text: "Paaralang dakila" },
-            { time: 80, text: "PUP, pinagpala" }
-        ];
+        const lyricsStartTime = 11;
+        const lyricsEndTime = 100;
+        const scrollDistance = 800;
 
-        // Render the lyrics initially
-        lyrics.forEach((line, index) => {
-            const lineElement = document.createElement('div');
-            lineElement.classList.add('lyrics-line');
-            lineElement.id = `line-${index}`;
-            lineElement.innerText = line.text;
-            lyricsContainer.appendChild(lineElement);
-        });
-
-        // Highlight function to sync lyrics
-        function highlightLyrics() {
+        function syncLyrics() {
             const currentTime = audio.currentTime;
 
-            for (let i = 0; i < lyrics.length; i++) {
-                const currentLine = document.getElementById(`line-${i}`);
-                const nextTime = lyrics[i + 1] ? lyrics[i + 1].time : Number.MAX_VALUE;
-
-                if (currentTime >= lyrics[i].time && currentTime < nextTime) {
-                    currentLine.classList.add('highlight');
-                    // Optional: scroll into view
-                    currentLine.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                } else {
-                    currentLine.classList.remove('highlight');
-                }
+            if (currentTime < lyricsStartTime) {
+                lyricsContent.style.top = '0px';
+            } else if (currentTime >= lyricsStartTime && currentTime <= lyricsEndTime) {
+                const progress = (currentTime - lyricsStartTime) / (lyricsEndTime - lyricsStartTime);
+                const scrollPosition = -progress * scrollDistance;
+                lyricsContent.style.top = `${scrollPosition}px`;
+            } else if (currentTime > lyricsEndTime) {
+                lyricsContent.style.top = `${-scrollDistance}px`;
             }
 
-            requestAnimationFrame(highlightLyrics);
+            requestAnimationFrame(syncLyrics);
         }
 
-        // Start syncing lyrics when audio plays
-        audio.addEventListener('play', () => {
-            requestAnimationFrame(highlightLyrics);
+        window.addEventListener('load', () => {
+            audio.play().then(() => {
+                syncLyrics();
+            }).catch(err => {
+                console.log("Autoplay prevented by browser:", err);
+                alert("Click anywhere to start the audio!");
+                document.addEventListener('click', () => {
+                    audio.play();
+                    syncLyrics();
+                }, { once: true });
+            });
         });
 
-        // Reset lyrics when audio ends
         audio.addEventListener('ended', () => {
-            document.querySelectorAll('.lyrics-line').forEach(line => line.classList.remove('highlight'));
+            lyricsContent.style.top = '0px';
+        });
+
+        audio.addEventListener('seeked', () => {
+            syncLyrics();
         });
     </script>
 
