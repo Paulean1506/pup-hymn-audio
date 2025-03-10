@@ -1,4 +1,4 @@
-Project: PUP Hymn Synced Lyrics
+"Project: PUP Hymn Synced Lyrics
 Student: Paulean Marguerette F. Parrish
 Section: BSCPE 3-6
 
